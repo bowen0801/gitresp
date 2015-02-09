@@ -1,0 +1,65 @@
+<assembly  xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+    <id>bin</id>
+    <!-- Generates a zip package containing the needed files -->
+    <formats>
+        <format>tar.gz</format>
+    </formats>
+	<!-- includeBaseDirectory指打包时是否添加一层名为${artifactId}的文件夹 -->
+	<includeBaseDirectory>false</includeBaseDirectory>
+    <!-- Adds dependencies to zip package under lib directory -->
+    <dependencySets>
+        <dependencySet>
+        	<useProjectArtifact>true</useProjectArtifact><!-- 当前项目构件是否包含在这个依赖集合里 -->
+            <outputDirectory>lib</outputDirectory>
+            <unpack>false</unpack><!-- 依赖的第三方包单独抽取 -->
+            <scope>runtime</scope><!-- 运行时依赖的jar -->
+        </dependencySet>
+    </dependencySets>
+
+    <fileSets>
+        <!--  Adds startup scripts to the root directory of zip package
+        	从src/main/scripts目录获取shell脚本复制到bin目录。同时设置文件模式为unix，文件具有可执行权限 -->
+        <fileSet>
+            <directory>src/main/scripts</directory>
+            <outputDirectory>bin</outputDirectory>
+            <lineEnding>unix</lineEnding>
+            <fileMode>0755</fileMode>
+            <includes>
+                <include>*.sh</include>
+            </includes>
+        </fileSet>
+        <!-- 
+        <fileSet>  
+            <directory>target/classes</directory>  
+            <outputDirectory>/conf</outputDirectory>  
+            <includes>  
+                <include>*.xml</include>  
+            </includes>  
+        </fileSet>
+         -->
+        <fileSet>
+        	<directory>META-INF</directory>
+        	<outputDirectory>META-INF</outputDirectory>
+        	<includes>
+        		<include>*.*</include>
+        	</includes>
+        </fileSet>
+        <!-- 说明文件 -->
+        <fileSet>
+	      <outputDirectory>/</outputDirectory>
+	      <includes>
+	        <include>README.txt</include>
+	      </includes>
+	    </fileSet>
+	    <!--  software foundation's policies. -->
+	    <fileSet>
+	      <outputDirectory>META-INF</outputDirectory>
+	      <includes>
+	        <include>LICENSE.txt</include>
+	      </includes>
+	    </fileSet>
+        
+    </fileSets>
+</assembly>

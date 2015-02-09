@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-lazy-init="true" xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	
+	
+	<import resource="datasource.xml" />
+	
+	<bean id="suggestServerMaster" class="com.ccigmall.bean.SolrServerMaster">
+		<property name="serverAddress" value="http://solr0master:8983/solr/suggestcore"></property>
+	</bean>
+	<bean id="cateServerMaster" class="com.ccigmall.bean.SolrServerMaster">
+		<property name="serverAddress" value="http://solr0master:8983/solr/catalogcore"></property>
+	</bean>
+	<bean id="attrServerMaster" class="com.ccigmall.bean.SolrServerMaster">
+		<property name="serverAddress" value="http://solr0master:8983/solr/attrcore"></property>
+	</bean>
+</beans>

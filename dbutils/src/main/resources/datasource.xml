@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <beans default-lazy-init="true" xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd"> -->
+     <beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+ 	 http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+ 	 http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-3.2.xsd
+       " default-lazy-init="true" >
+     
+     
+<!-- 加载配置属性文件 -->
+	<context:property-placeholder ignore-unresolvable="true" location="classpath*:/jdbc.properties" />
+		 
+<!-- 	<bean id="category" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close" lazy-init="true">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://192.168.1.114:3306/ccigmall_category" />
+		<property name="username" value="xinnet" />
+		<property name="password" value="xinnet@uk!dnto9" />
+		<property name="maxActive" value="10"/>
+    	<property name="initialSize" value="2"/> 
+	</bean> -->
+	
+	<bean id="category" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close" lazy-init="true">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="maxActive" value="10"/>
+    	<property name="initialSize" value="2"/> 
+	</bean>
+	
+	<!-- <bean class="com.ccigmall.baseindex.config.DataSourceConfiguration">
+		<constructor-arg>
+			<map>
+				<entry key="category" value-ref="category"></entry>
+			</map>
+		</constructor-arg>
+	</bean> -->
+	
+</beans>
