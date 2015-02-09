@@ -22,6 +22,7 @@ public class DbTest {
 		DBQuery<CateBean> dbQuery = new DBQuery<CateBean>(CateBean.class);
 		
 		try {
+			
 			/*dbQuery.query("select line_name.line_name_en from td_prodline", "category");*/
 			List<CateBean> list = dbQuery.queryList("select line_name as lineName,line_name_cn as lineNameEn from td_prodline", "category");
 			
